@@ -1,5 +1,4 @@
 #!/bin/sh
-echo "WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM IN MASTER BRANCH"
 #use Case 1-
 CheckAttendance()
 {
@@ -43,6 +42,7 @@ CondMonthlyWage()
 		fi
 	done
 
+echo "Conditional Monthly Payment of 100hr/20Days"
 echo -e "1. Full Time Employee \n2. Part Time Employee"
 echo "Enter one option"
 read option
@@ -55,7 +55,7 @@ case $option in
 		else
 			MonthlyWages=$((100*20))
 		fi
-		echo "Monthly Payment of 100Hours/20Days is Rs"$MonthlyWages
+		echo "Monthly Payment of 100Hours/20Days of Full Time Employee is Rs"$MonthlyWages
 		;;
 	2)
 		TotalWorkHour=$((4*$count))

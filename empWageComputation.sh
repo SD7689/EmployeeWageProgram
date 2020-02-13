@@ -10,6 +10,7 @@ CheckAttendance()
             		return 1
         	fi
 }
+CheckAttendance
 #UserCase_2
 DailyWage()
 {
@@ -28,6 +29,23 @@ PartTime_Wage()
 	return $PartTime
 	echo "Part Time Wage Of a Employee is Rs$PartTime."
 }
+#UserCase_4
+echo "1.DailyWages \n 2.Partime Wage"
+echo "Enter one Option:"
+read option
+case $option in
+	1)
+		DailyWage
+		echo Employee Daily Wage is Rs $?
+		;;
+	2)
+		PartTime_Wage
+		echo Part Time Wage Of a Employee is Rs $?
+		;;
+	*)
+		echo "Enter a Valid option"
+		;;
+esac
 #UserCase_5
 MonthlyWage()
 {
@@ -40,21 +58,18 @@ MonthlyWage()
 			count=$((count+1))
 		fi
 	done
-#UserCase_4 Switch Statement
-echo "1.DailyWages \n 2.Partime Wage"
+echo -e "1.Monthly DailyWage \n2.Monthly Partime Wage"
 echo "Enter one Option:"
 read option
 case $option in
 	1)
 		DailyWage
 		wages=$?
-		#echo Employee Daily Wage is Rs $?
-		echo Montly Wage of employee is Rs$(($wages*$count))
+		echo "Monthly wage of a Full time Employee is Rs"$(($wages*$count))
 		;;
 	2)
 		PartTime_Wage
 		wages=$?
-		#echo Part Time Wage Of a Employee is Rs $?
 		echo "Monthly wage of PartTime employee is Rs"$(($wages*$count))
 		;;
 	*)

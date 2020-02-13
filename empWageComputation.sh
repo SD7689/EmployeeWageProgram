@@ -42,13 +42,31 @@ CondMonthlyWage()
 			count=$((count+1))
 		fi
 	done
-	TotalWorkHour=$((8*count))
-	if(($TotalWorkHour<100 && count<=20))
-	then
-		MonthlyWages=$((TotalWorkHour*20))
-	else
-		MonthlyWages=$((100*20))
-	fi
-	echo "Monthly Payment of 100Hours/20Days is Rs"$MonthlyWages
+
+echo -e "1. Full Time Employee \n2. Part Time Employee"
+echo "Enter one option"
+read option
+case $option in
+	1)
+		TotalWorkHour=$((8*$count))
+		if(($TotalWorkHour<100 && $count<=20))
+		then
+			MonthlyWages=$(($TotalWorkHour*20))
+		else
+			MonthlyWages=$((100*20))
+		fi
+		echo "Monthly Payment of 100Hours/20Days is Rs"$MonthlyWages
+		;;
+	2)
+		TotalWorkHour=$((4*$count))
+		if(($TotalWorkHour<100 && $count<=20))
+		then
+			MonthlyWages=$(($TotalWorkHour*20))
+		else
+			MonthlyWages=$((100*20))
+		fi
+		echo "Monthly Payment of PartTime Employee is Rs"$MonthlyWages
+		;;
+esac
 }
 CondMonthlyWage

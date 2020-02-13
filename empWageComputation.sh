@@ -12,6 +12,7 @@ CheckAttendance()
         	fi
 }
 CheckAttendance
+
 #UserCase_2
 DailyWage()
 {
@@ -21,6 +22,7 @@ DailyWage()
 	return $Dailywage
 	echo "Employee Daily Wage is Rs$Dailywage of $FullDay_Hour hours"
 }
+
 #UserCase_3
 PartTime_Wage()
 {
@@ -30,23 +32,27 @@ PartTime_Wage()
 	return $PartTime
 	echo "Part Time Wage Of a Employee is Rs$PartTime."
 }
+
 #UserCase_4
-echo "1.DailyWages \n 2.Partime Wage"
+echo -e "1.DailyWages \n2.Partime Wage"
 echo "Enter one Option:"
 read option
 case $option in
 	1)
 		DailyWage
 		echo Employee Daily Wage is Rs $?
+		echo " "
 		;;
 	2)
 		PartTime_Wage
 		echo Part Time Wage Of a Employee is Rs $?
+		echo " "
 		;;
 	*)
 		echo "Enter a Valid option"
 		;;
 esac
+
 #UserCase_5
 MonthlyWage()
 {
@@ -59,6 +65,7 @@ MonthlyWage()
 			count=$((count+1))
 		fi
 	done
+echo "Monthly Payment Of Employee"
 echo -e "1.Monthly DailyWage \n2.Monthly Partime Wage"
 echo "Enter one Option:"
 read option
@@ -67,11 +74,13 @@ case $option in
 		DailyWage
 		wages=$?
 		echo "Monthly wage of a Full time Employee is Rs"$(($wages*$count))
+		echo " "
 		;;
 	2)
 		PartTime_Wage
 		wages=$?
 		echo "Monthly wage of PartTime employee is Rs"$(($wages*$count))
+		echo " "
 		;;
 	*)
 		echo "Enter a Valid option"
@@ -79,3 +88,47 @@ case $option in
 esac
 }
 MonthlyWage
+
+#UserCase_6
+CondMonthlyWage()
+{
+	for((i=0; i<20; i++))
+	do
+		CheckAttendance
+		res=$?
+		if(($res==0))
+		then
+			count=$((count+1))
+		fi
+	done
+
+echo "Conditional Monthly Payment of 100hr/20Days"
+echo -e "1. Full Time Employee \n2. Part Time Employee"
+echo "Enter one option"
+read option
+case $option in
+	1)
+		TotalWorkHour=$((8*$count))
+		if(($TotalWorkHour<100 && $count<=20))
+		then
+			MonthlyWages=$(($TotalWorkHour*20))
+		else
+			MonthlyWages=$((100*20))
+		fi
+		echo "Monthly Payment of 100Hours/20Days of Full Time Employee is Rs"$MonthlyWages
+		echo
+		;;
+	2)
+		TotalWorkHour=$((4*$count))
+		if(($TotalWorkHour<100 && $count<=20))
+		then
+			MonthlyWages=$(($TotalWorkHour*20))
+		else
+			MonthlyWages=$((100*20))
+		fi
+		echo "Monthly Payment of 100Hours/20Days of PartTime Employee is Rs"$MonthlyWages
+		echo 
+		;;
+esac
+}
+CondMonthlyWage

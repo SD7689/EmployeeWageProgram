@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM IN MASTER BRANCH"
 #use Case 1-
+declare -A array
 CheckAttendance()
 {
     	Attendance=$(($RANDOM%2))
@@ -164,3 +165,57 @@ count=0
 WorkHour
 echo "Total Working Hour of Employee is $?"
 echo 
+
+#UserCase_8
+DailyAndTotalWages()
+{
+	echo "Daily and Total Wages Of an Employee In a Month!!"
+	echo -e "1.Full Time Employee \n2.Part Time Employee"
+	echo "Enter an Option"
+	read option
+	case $option in
+	1)
+		i=0
+		while((i<20))
+		do
+			CheckAttendance
+			res=$?
+			if(($res==0))
+			then
+				DailyWage
+				wage=$?
+				array[$i]=$wage
+			else
+				array[$i]=0
+			fi
+			i=$((i+1))
+		done
+		;;
+	2)
+		i=0
+		while((i<20))
+		do
+			CheckAttendance
+			res=$?
+			if(($res==0))
+			then
+				PartTime_Wage
+				wage=$?
+				array[$i]=$wage
+			else
+				array[$i]=0
+			fi
+			i=$((i+1))
+		done
+		;;
+	esac
+		for((i=0; i<20; i++))
+		do
+			echo -n $((array[$i])) ""
+			sum=$(($sum+array[$i]))
+
+		done
+			echo
+			echo "Sum of Total Wages is Rs"$sum
+}
+DailyAndTotalWages

@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM IN MASTER BRANCH"
+echo "<<--------WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM IN MASTER BRANCH-------->>"
 #use Case 1-
 declare -A array
 CheckAttendance()
@@ -13,6 +13,13 @@ CheckAttendance()
         	fi
 }
 CheckAttendance
+Present=$?
+	if(($Present==0))
+	then
+		echo "Employee is Present!!"
+	else
+		echo "Employe is Absent!!"
+	fi
 
 #UserCase_2
 DailyWage()
@@ -21,7 +28,7 @@ DailyWage()
 	FullDay_Hour=8
 	Dailywage=$(($FullDay_Hour*$Wage_per_Hour))
 	return $Dailywage
-	echo "Employee Daily Wage is Rs$Dailywage of $FullDay_Hour hours"
+	echo "Employee Daily Wage is Rs $Dailywage of $FullDay_Hour hours"
 }
 
 #UserCase_3
@@ -31,10 +38,11 @@ PartTime_Wage()
 	Wages_Per_Hour=20
 	PartTime=$(($PartTime_Hour*$Wages_Per_Hour))
 	return $PartTime
-	echo "Part Time Wage Of a Employee is Rs$PartTime."
+	echo "Part Time Wage Of a Employee is Rs $PartTime."
 }
 
 #UserCase_4
+echo "<<---------Employee Daily / Partime Wages:--------->>"
 echo -e "1.DailyWages \n2.Partime Wage"
 echo "Enter one Option:"
 read option
@@ -66,7 +74,7 @@ MonthlyWage()
 			count=$((count+1))
 		fi
 	done
-echo "Monthly Payment Of Employee"
+echo "<<----------Monthly Payment Of Employee---------->>"
 echo -e "1.Monthly DailyWage \n2.Monthly Partime Wage"
 echo "Enter one Option:"
 read option
@@ -74,13 +82,13 @@ case $option in
 	1)
 		DailyWage
 		wages=$?
-		echo "Monthly wage of a Full time Employee is Rs"$(($wages*$count))
+		echo "Monthly wage of a Full time Employee is Rs" $(($wages*$count))
 		echo " "
 		;;
 	2)
 		PartTime_Wage
 		wages=$?
-		echo "Monthly wage of PartTime employee is Rs"$(($wages*$count))
+		echo "Monthly wage of PartTime employee is Rs" $(($wages*$count))
 		echo " "
 		;;
 	*)
@@ -103,7 +111,7 @@ CondMonthlyWage()
 		fi
 	done
 
-echo "Conditional Monthly Payment of 100hr/20Days"
+echo "<<----------Conditional Monthly Payment of 100hr/20Days---------->>"
 echo -e "1. Full Time Employee \n2. Part Time Employee"
 echo "Enter one option"
 read option
@@ -116,7 +124,7 @@ case $option in
 		else
 			MonthlyWages=$((100*20))
 		fi
-		echo "Monthly Payment of 100Hours/20Days of Full Time Employee is Rs"$MonthlyWages
+		echo "Monthly Payment of 100Hours/20Days of Full Time Employee is Rs" $MonthlyWages
 		echo
 		;;
 	2)
@@ -127,7 +135,7 @@ case $option in
 		else
 			MonthlyWages=$((100*20))
 		fi
-		echo "Monthly Payment of 100Hours/20Days of PartTime Employee is Rs"$MonthlyWages
+		echo "Monthly Payment of 100Hours/20Days of PartTime Employee is Rs" $MonthlyWages
 		echo 
 		;;
 esac
@@ -147,7 +155,7 @@ count=0
 			count=$(($count+1))
 		fi
 	done
-	echo "Total Working Hour Of an Employee"
+	echo "<<--------Total Working Hour Of an Employee-------->>"
 	echo -e "1.Full Time employee \n2.Part Time Employee"
 	echo "Enter a option"
 	read option
@@ -169,7 +177,7 @@ echo
 #UserCase_8
 DailyAndTotalWages()
 {
-	echo "Daily and Total Wages Of an Employee In a Month!!"
+	echo "<<---------Daily and Total Wages Of an Employee In a Month!!-------->>"
 	echo -e "1.Full Time Employee \n2.Part Time Employee"
 	echo "Enter an Option"
 	read option
@@ -216,6 +224,68 @@ DailyAndTotalWages()
 
 		done
 			echo
-			echo "Sum of Total Wages is Rs"$sum
+			echo "Sum of Total Wages is Rs" $sum
+			echo
 }
 DailyAndTotalWages
+
+#UserCase_9
+DailyAndMonthlyTotalWages()
+{
+	echo "<<---------Daily, Monthly and Total Wages Of an Employee In a Month!!--------->>"
+	echo -e "1.Full Time Employee \n2.Part Time Employee"
+	echo "Enter an Option"
+	read option
+	case $option in
+	1)
+		i=0
+		while((i<20))
+		do
+			CheckAttendance
+			res=$?
+			if(($res==0))
+			then
+				DailyWage
+				wage=$?
+				array[$i]=$wage
+			else
+				array[$i]=0
+			fi
+			i=$((i+1))
+		done
+		;;
+	2)
+		i=0
+		while((i<20))
+		do
+			CheckAttendance
+			res=$?
+			if(($res==0))
+			then
+				PartTime_Wage
+				wage=$?
+				array[$i]=$wage
+			else
+				array[$i]=0
+			fi
+			i=$((i+1))
+		done
+		;;
+	esac
+		echo "Daily Wages: "
+		for((i=0; i<20; i++))
+		do
+			if(($((array[i]))==0 ))
+			then
+				echo -n "Day $((i+1)) :  Absent "
+			else
+				echo -n "Day $((i+1)) :  Present "
+			fi
+			echo $((array[$i])) ""
+			sum=$(($sum+array[$i]))
+
+		done
+			echo
+			echo "Sum of Total Wages is Rs" $sum
+}
+DailyAndMonthlyTotalWages

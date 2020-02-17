@@ -36,6 +36,7 @@ PartTime_Wage()
 #UserCase_9
 DailyAndMonthlyTotalWages()
 {
+	sum=0
 	echo "Daily and Total Wages Of an Employee In a Month!!"
 	echo -e "1.Full Time Employee \n2.Part Time Employee"
 	echo "Enter an Option"
@@ -79,7 +80,7 @@ DailyAndMonthlyTotalWages()
 		echo "Daily Wages: "
 		for((i=0; i<20; i++))
 		do
-			if(($((array[i]))==0 ))
+			if(($((array[$i]))==0 ))
 			then
 				echo -n "Day $((i+1)) :  Absent "
 			else
